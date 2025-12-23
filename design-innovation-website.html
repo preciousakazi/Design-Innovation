@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Innovation - Architectural & Interior Design App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --champagne: #F7E7CE;
+            --warm-beige: #E8DCC4;
+            --taupe: #C9B8A3;
+            --sand: #D4C4AA;
+            --charcoal: #3A3A38;
+            --deep-charcoal: #2B2B29;
+            --black-olive: #1C1C1A;
+            --cream: #FAF8F5;
+            --ivory: #FFFFF0;
+            --warm-gray: #A39B8B;
+            --bronze: #9C7A5C;
+            --soft-gold: #CDB891;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--black-olive);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(28, 28, 26, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(201, 184, 163, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(28, 28, 26, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--champagne);
+            text-decoration: none;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--sand) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(247, 231, 206, 0.2);
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            transform: translateX(-100%) rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .logo:hover .logo-icon::before {
+            transform: translateX(200%) rotate(45deg);
+        }
+
+        .logo:hover {
+            color: var(--sand);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 1.2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--champagne);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--champagne);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--black-olive) 0%, var(--deep-charcoal) 50%, #2A2A28 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(247, 231, 206, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(201, 184, 163, 0.06) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(247, 231, 206, 0.02) 1px, rgba(247, 231, 206, 0.02) 2px);
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            padding: 0 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--cream) 30%, var(--sand) 70%, var(--taupe) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+            text-shadow: 0 0 40px rgba(247, 231, 206, 0.1);
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .hero .subtitle {
+            font-size: 1.6rem;
+            color: var(--warm-beige);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1.3rem 3.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--sand) 100%);
+            color: var(--deep-charcoal);
+            box-shadow: 0 10px 40px rgba(247, 231, 206, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(247, 231, 206, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--champagne);
+            border: 2px solid var(--champagne);
+        }
+
+        .btn-secondary:hover {
+            background: var(--champagne);
+            color: var(--deep-charcoal);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 10rem 3rem;
+            background: var(--deep-charcoal);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--champagne), transparent);
+        }
+
+        .features::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(247, 231, 206, 0.02) 2px, rgba(247, 231, 206, 0.02) 4px);
+            pointer-events: none;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-title h2 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--champagne);
+            letter-spacing: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.3rem;
+            color: var(--warm-beige);
+            font-weight: 300;
+            letter-spacing: 1.5px;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(58, 58, 56, 0.4) 0%, rgba(43, 43, 41, 0.6) 100%);
+            padding: 3.5rem;
+            border: 1px solid rgba(201, 184, 163, 0.12);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(247, 231, 206, 0.06), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--champagne);
+            box-shadow: 0 20px 60px rgba(201, 184, 163, 0.12);
+            background: linear-gradient(135deg, rgba(58, 58, 56, 0.5) 0%, rgba(43, 43, 41, 0.7) 100%);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: var(--champagne);
+            filter: drop-shadow(0 0 10px rgba(247, 231, 206, 0.2));
+        }
+
+        .feature-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--cream);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            color: var(--warm-beige);
+            line-height: 1.9;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+
+        /* Differentiators Section */
+        .differentiators {
+            padding: 10rem 3rem;
+            background: linear-gradient(180deg, var(--black-olive) 0%, var(--deep-charcoal) 100%);
+        }
+
+        .diff-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+
+        .diff-item {
+            display: flex;
+            gap: 2.5rem;
+            padding: 3rem;
+            background: rgba(58, 58, 56, 0.3);
+            border-left: 4px solid var(--champagne);
+            transition: all 0.4s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .diff-item:hover {
+            background: rgba(58, 58, 56, 0.5);
+            transform: translateX(15px);
+            box-shadow: -10px 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .diff-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--champagne);
+            line-height: 1;
+            opacity: 0.9;
+        }
+
+        .diff-content h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--cream);
+            letter-spacing: 1px;
+        }
+
+        .diff-content p {
+            color: var(--warm-beige);
+            font-weight: 300;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Personas Section */
+        .personas {
+            padding: 10rem 3rem;
+            background: var(--deep-charcoal);
+        }
+
+        .personas-grid {
+            max-width: 1400px;
+            margin: 5rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .persona-card {
+            background: linear-gradient(135deg, rgba(28, 28, 26, 0.6) 0%, rgba(58, 58, 56, 0.6) 100%);
+            padding: 3.5rem;
+            border: 1px solid rgba(201, 184, 163, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .persona-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--champagne), var(--sand));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .persona-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .persona-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--champagne);
+            box-shadow: 0 15px 50px rgba(201, 184, 163, 0.1);
+        }
+
+        .persona-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 184, 163, 0.15);
+        }
+
+        .persona-header h3 {
+            font-size: 2.2rem;
+            color: var(--champagne);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .persona-title {
+            color: var(--warm-beige);
+            font-size: 1.15rem;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        .persona-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .persona-detail {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .detail-label {
+            color: var(--champagne);
+            font-weight: 600;
+            min-width: 100px;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: var(--warm-beige);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 10rem 3rem;
+            background: linear-gradient(180deg, var(--black-olive) 0%, #252523 100%);
+        }
+
+        .pricing-grid {
+            max-width: 1400px;
+            margin: 5rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .pricing-card {
+            background: rgba(58, 58, 56, 0.4);
+            padding: 3.5rem 3rem;
+            border: 1px solid rgba(201, 184, 163, 0.12);
+            transition: all 0.4s ease;
+            position: relative;
+            border-radius: 3px;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, rgba(247, 231, 206, 0.08) 0%, rgba(58, 58, 56, 0.6) 100%);
+            border: 2px solid var(--champagne);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--champagne);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.07);
+        }
+
+        .plan-name {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--champagne);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 2.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--warm-beige);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .plan-features li {
+            padding: 1rem 0;
+            color: var(--warm-beige);
+            border-bottom: 1px solid rgba(201, 184, 163, 0.08);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .plan-features li::before {
+            content: '✦';
+            color: var(--champagne);
+            margin-right: 1.2rem;
+        }
+
+        .plan-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: transparent;
+            color: var(--champagne);
+            border: 2px solid var(--champagne);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .plan-btn:hover {
+            background: var(--champagne);
+            color: var(--deep-charcoal);
+            transform: translateY(-2px);
+        }
+
+        .pricing-card.featured .plan-btn {
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--sand) 100%);
+            color: var(--deep-charcoal);
+            border: none;
+        }
+
+        .pricing-card.featured .plan-btn:hover {
+            box-shadow: 0 10px 30px rgba(247, 231, 206, 0.3);
+        }
+
+        /* Interactive Demo Section */
+        .demo {
+            padding: 10rem 3rem;
+            background: var(--deep-charcoal);
+            position: relative;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-visual {
+            margin-top: 5rem;
+            background: linear-gradient(135deg, rgba(28, 28, 26, 0.5) 0%, rgba(58, 58, 56, 0.6) 100%);
+            border: 2px solid rgba(201, 184, 163, 0.15);
+            padding: 5rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .demo-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(247, 231, 206, 0.05) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .demo-feature {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(28, 28, 26, 0.5);
+            border: 1px solid rgba(201, 184, 163, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .demo-feature:hover {
+            background: rgba(247, 231, 206, 0.08);
+            border-color: var(--champagne);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(247, 231, 206, 0.2));
+        }
+
+        .demo-feature h4 {
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .demo-feature p {
+            color: var(--warm-beige);
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 10rem 3rem;
+            background: linear-gradient(180deg, var(--black-olive) 0%, var(--deep-charcoal) 100%);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 3rem;
+            color: var(--champagne);
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .contact-icon {
+            font-size: 2.2rem;
+            color: var(--champagne);
+        }
+
+        .contact-text {
+            color: var(--warm-beige);
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        .contact-text a {
+            color: var(--warm-beige);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-text a:hover {
+            color: var(--champagne);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-icon {
+            font-size: 2.2rem;
+            color: var(--champagne);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            color: var(--cream);
+            transform: translateY(-5px);
+            filter: drop-shadow(0 5px 10px rgba(247, 231, 206, 0.3));
+        }
+
+        .contact-form {
+            background: rgba(58, 58, 56, 0.4);
+            padding: 4rem;
+            border: 1px solid rgba(201, 184, 163, 0.12);
+            border-radius: 3px;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--champagne);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(28, 28, 26, 0.6);
+            border: 1px solid rgba(201, 184, 163, 0.2);
+            color: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--champagne);
+            background: rgba(28, 28, 26, 0.8);
+            box-shadow: 0 0 20px rgba(247, 231, 206, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 160px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 3rem;
+            background: var(--black-olive);
+            border-top: 1px solid rgba(201, 184, 163, 0.1);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--warm-beige);
+            font-weight: 300;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4.5rem; }
+            .diff-grid { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; }
+            .demo-features { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.5rem; font-size: 0.85rem; }
+            .logo { font-size: 1.2rem; letter-spacing: 2px; }
+            .logo-icon { width: 45px; height: 45px; font-size: 1.3rem; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero .subtitle { font-size: 1.3rem; }
+            .cta-buttons { flex-direction: column; gap: 1rem; }
+            .section-title h2 { font-size: 3.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon serif">DI</div>
+                <span class="serif">DESIGN INNOVATION</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#personas">For You</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="serif">Design Innovation</h1>
+            <p class="subtitle">Where Architecture Meets Imagination</p>
+            <div class="cta-buttons">
+                <a href="#pricing" class="btn btn-primary">START CREATING</a>
+                <a href="#demo" class="btn btn-secondary">EXPLORE DEMO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title scroll-animate">
+            <h2 class="serif">Revolutionary Features</h2>
+            <p>Transform your creative vision into stunning reality</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">🎨</div>
+                <h3>Drag & Drop Simplicity</h3>
+                <p>Intuitive interface that makes professional design accessible to everyone. Simply drag, drop, and watch your vision come to life with effortless precision.</p>
+            </div>
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Recommendations</h3>
+                <p>Intelligent suggestions tailored to your style and space. Our advanced AI analyzes your preferences and offers design solutions that match your unique aesthetic.</p>
+            </div>
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">🔮</div>
+                <h3>AR Technology</h3>
+                <p>Visualize designs in your actual space with cutting-edge augmented reality. See exactly how your vision fits before making any commitments.</p>
+            </div>
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">📐</div>
+                <h3>3D Visualization</h3>
+                <p>Experience your designs in stunning three-dimensional detail. Explore every angle, adjust lighting, and perfect every element before execution.</p>
+            </div>
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">👥</div>
+                <h3>Real-Time Collaboration</h3>
+                <p>Work seamlessly with team members, clients, or contractors. Share designs instantly and collaborate in real-time on projects of any scale.</p>
+            </div>
+            <div class="feature-card scroll-animate">
+                <div class="feature-icon">📱</div>
+                <h3>Room Scanning</h3>
+                <p>Instantly capture and digitize any space with advanced scanning technology. Create accurate digital twins of rooms for precise planning and design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiators Section -->
+    <section class="differentiators" id="why-us">
+        <div class="diff-container">
+            <div class="section-title scroll-animate">
+                <h2 class="serif">What Sets Us Apart</h2>
+                <p>The future of design is here, and it's extraordinary</p>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-item scroll-animate">
+                    <div class="diff-number serif">01</div>
+                    <div class="diff-content">
+                        <h4>Dual Discipline Mastery</h4>
+                        <p>Unlike competitors who specialize in just architecture or interior design, Design Innovation seamlessly bridges both worlds, offering a complete creative solution for every vision.</p>
+                    </div>
+                </div>
+                <div class="diff-item scroll-animate">
+                    <div class="diff-number serif">02</div>
+                    <div class="diff-content">
+                        <h4>AI-Enhanced Reality</h4>
+                        <p>Our proprietary AI doesn't just suggest—it understands your style, learns your preferences, and creates personalized recommendations that evolve with every project you complete.</p>
+                    </div>
+                </div>
+                <div class="diff-item scroll-animate">
+                    <div class="diff-number serif">03</div>
+                    <div class="diff-content">
+                        <h4>True Collaboration</h4>
+                        <p>Multiple users working simultaneously on the same project in real-time. No more version conflicts or delayed feedback—just seamless teamwork that elevates creativity.</p>
+                    </div>
+                </div>
+                <div class="diff-item scroll-animate">
+                    <div class="diff-number serif">04</div>
+                    <div class="diff-content">
+                        <h4>Network & Grow</h4>
+                        <p>Connect with fellow designers, architects, and creatives worldwide. Share inspiration, collaborate on groundbreaking projects, and build your professional network—all within the app.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personas Section -->
+    <section class="personas" id="personas">
+        <div class="section-title scroll-animate">
+            <h2 class="serif">Designed For You</h2>
+            <p>From professionals to enthusiasts, Design Innovation empowers every creative vision</p>
+        </div>
+        <div class="personas-grid">
+            <div class="persona-card scroll-animate">
+                <div class="persona-header">
+                    <h3 class="serif">Sarah Thompson</h3>
+                    <p class="persona-title">Interior Designer</p>
+                </div>
+                <div class="persona-details">
+                    <div class="persona-detail">
+                        <span class="detail-label">Age:</span>
+                        <span class="detail-value">34</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Goal:</span>
+                        <span class="detail-value">Impress clients with innovative, immersive design presentations that bring visions to life</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Passion:</span>
+                        <span class="detail-value">Experimenting with cutting-edge design tools daily to stay ahead of trends</span>
+                    </div>
+                </div>
+            </div>
+            <div class="persona-card scroll-animate">
+                <div class="persona-header">
+                    <h3 class="serif">John Miller</h3>
+                    <p class="persona-title">Architect</p>
+                </div>
+                <div class="persona-details">
+                    <div class="persona-detail">
+                        <span class="detail-label">Age:</span>
+                        <span class="detail-value">41</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Goal:</span>
+                        <span class="detail-value">Seamlessly integrate architectural plans with interior design for complete project visualization</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Passion:</span>
+                        <span class="detail-value">Collaborative tools that enhance workflow efficiency and client communication</span>
+                    </div>
+                </div>
+            </div>
+            <div class="persona-card scroll-animate">
+                <div class="persona-header">
+                    <h3 class="serif">Alex Garcia</h3>
+                    <p class="persona-title">Freelance Designer</p>
+                </div>
+                <div class="persona-details">
+                    <div class="persona-detail">
+                        <span class="detail-label">Age:</span>
+                        <span class="detail-value">29</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Goal:</span>
+                        <span class="detail-value">Expand creative services beyond graphic design into spatial and architectural projects</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Passion:</span>
+                        <span class="detail-value">3D modeling and discovering innovative design software that pushes creative boundaries</span>
+                    </div>
+                </div>
+            </div>
+            <div class="persona-card scroll-animate">
+                <div class="persona-header">
+                    <h3 class="serif">Lisa Li</h3>
+                    <p class="persona-title">Home Enthusiast</p>
+                </div>
+                <div class="persona-details">
+                    <div class="persona-detail">
+                        <span class="detail-label">Age:</span>
+                        <span class="detail-value">39</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Goal:</span>
+                        <span class="detail-value">Create beautiful home designs without the complexity of professional software</span>
+                    </div>
+                    <div class="persona-detail">
+                        <span class="detail-label">Passion:</span>
+                        <span class="detail-value">DIY projects and staying current with the latest home decor trends and styles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title scroll-animate">
+            <h2 class="serif">Choose Your Plan</h2>
+            <p>Flexible pricing for every creative journey</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card scroll-animate">
+                <h3 class="plan-name">Free</h3>
+                <div class="plan-price">$0<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>Basic design tools</li>
+                    <li>Limited templates</li>
+                    <li>Essential elements library</li>
+                    <li>2D visualization</li>
+                    <li>Community access</li>
+                </ul>
+                <button class="plan-btn">START FREE</button>
+            </div>
+            <div class="pricing-card scroll-animate">
+                <h3 class="plan-name">Standard</h3>
+                <div class="plan-price">$29<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>AI-powered recommendations</li>
+                    <li>AR visualization</li>
+                    <li>View-only collaboration</li>
+                    <li>Extended template library</li>
+                    <li>3D rendering</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="plan-btn">CHOOSE STANDARD</button>
+            </div>
+            <div class="pricing-card featured scroll-animate">
+                <h3 class="plan-name">Professional</h3>
+                <div class="plan-price">$79<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>Full collaboration suite</li>
+                    <li>Real-time team editing</li>
+                    <li>Advanced AI features</li>
+                    <li>Unlimited projects</li>
+                    <li>Premium templates</li>
+                    <li>Export in all formats</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <button class="plan-btn">GO PROFESSIONAL</button>
+            </div>
+            <div class="pricing-card scroll-animate">
+                <h3 class="plan-name">Advanced</h3>
+                <div class="plan-price">$149<span>/month</span></div>
+                <ul class="plan-features">
+                    <li>White-label branding</li>
+                    <li>Client project marketplace</li>
+                    <li>Sell your designs</li>
+                    <li>Unlimited floor plans</li>
+                    <li>API access</li>
+                    <li>Custom integrations</li>
+                    <li>Enterprise support</li>
+                </ul>
+                <button class="plan-btn">UNLEASH ADVANCED</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="demo" id="demo">
+        <div class="demo-container">
+            <div class="section-title scroll-animate">
+                <h2 class="serif">Experience The Power</h2>
+                <p>See how Design Innovation transforms the creative process</p>
+            </div>
+            <div class="demo-visual scroll-animate">
+                <div class="demo-features">
+                    <div class="demo-feature">
+                        <div class="demo-feature-icon">🏗️</div>
+                        <h4>Architecture Mode</h4>
+                        <p>Create structural designs with precision and scale</p>
+                    </div>
+                    <div class="demo-feature">
+                        <div class="demo-feature-icon">🛋️</div>
+                        <h4>Interior Mode</h4>
+                        <p>Design stunning spaces with unlimited creativity</p>
+                    </div>
+                    <div class="demo-feature">
+                        <div class="demo-feature-icon">🔄</div>
+                        <h4>Seamless Switch</h4>
+                        <p>Move between modes without losing progress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info scroll-animate">
+                <h3 class="serif">Get In Touch</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-icon">🌐</span>
+                        <div class="contact-text">
+                            <a href="https://www.NewDesign.com" target="_blank">www.NewDesign.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div class="contact-text">
+                            <a href="mailto:contact@newdesign.com">contact@newdesign.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <div class="contact-text">
+                            <a href="tel:+11234567890">+1 123-456-7890</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <span class="social-icon" title="Instagram">📷</span>
+                    <span class="social-icon" title="TikTok">🎵</span>
+                    <span class="social-icon" title="YouTube">▶️</span>
+                    <span class="social-icon" title="LinkedIn">💼</span>
+                </div>
+            </div>
+            <div class="contact-form scroll-animate">
+                <form>
+                    <div class="form-group">
+                        <label>NAME</label>
+                        <input type="text" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>MESSAGE</label>
+                        <textarea placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">SEND MESSAGE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Design Innovation. Crafted with passion by Precious Akazi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll be in touch soon.');
+            e.target.reset();
+        });
+
+        // Interactive demo features
+        document.querySelectorAll('.demo-feature').forEach(feature => {
+            feature.addEventListener('click', () => {
+                feature.style.animation = 'none';
+                setTimeout(() => {
+                    feature.style.animation = '';
+                }, 10);
+            });
+        });
+    </script>
+</body>
+</html>
